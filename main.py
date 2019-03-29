@@ -12,35 +12,77 @@ def f(row):
     return 1
 
 def clustering():
-    print("Clustering")
-    df = pd.read_csv("ebenezer.csv")
-    x_axis = np.arange(-10, 10, 0.001)
-    plt.plot(x_axis, norm.pdf(df['Time'], 0, 2))
-    plt.show()
+    print("Clustering 2")
+    df = pd.read_csv("Ebenezer_Stats2016-2019_full.csv")
 
-    mean = math.mean()
-    print("Mean: " + mean)
-    #df['Color'] = df.apply(f, axis=1)
-
-    #male = data.select(data['Gender'] == 'M')
-
-    return
 
     male = df.loc[df['Gender'] == 'M']
-    female = df.loc[df['Gender'] == 'F']
+    #female = df.loc[df['Gender'] == 'F']
+    #male2016 = male.loc[male['Year'] == '2016']
+    male2016 = male.query('Year == 2016')
+    male2017 = male.query('Year == 2017')
+    male2018 = male.query('Year == 2018')
+    male2019 = male.query('Year == 2019')
+    #print(male2016)
 
-    plt.scatter(male['Time'], male['Age'], c='blue', alpha=0.2, s=120, edgecolors='none', label='Male')
-    plt.scatter(female['Time'], female['Age'], c='red', alpha=0.2, s=120, edgecolors='none', label='Female')
+
+    #plt.bar(male['Year'], male['Age'])
+    ax = plt.figure()
+    min = df.loc[df['Age'].idxmin]
+    print('Min Age:', min.Age, 'Year:', min.Year, 'Time:', min.Time, 'Gender:', min.Gender)
+    max = df.loc[df['Age'].idxmax]
+    print('Max Age:', max.Age, 'Year:', max.Year, 'Time:', max.Time, 'Gender:', max.Gender)
+
+    averages = (df.groupby(['Year', 'Gender']).mean().groupby(['Year', 'Gender'])['Time'].mean())
+    df['Age'] = round(df['Age']/5)*5
+    total = (df.groupby(['Year', 'Age'])['Gender'].count()).unstack(0).fillna(0)
+    speed = (df.groupby(['Year', 'Age'])['Time'].mean()).unstack(0).fillna(0)
+    print(speed)
+    #print(total)
+    plt.xlabel('Count')
+    plt.ylabel('Age Group (5-years)')
+    ax = total.plot.barh()
+    ax.set(xlabel = "Count")
+    ax.set(ylabel="Age (5 Years)")
+
+
+    plt.show()
+
+    return;
+    print(averages.unstack())
+    averages.unstack().plot.barh()
+    plt.xlabel('Average Time (minutes)')
+    plt.ylabel('Year & Gender')
+    plt.show()
+    return
+    print(averages['Year'])
+    #plt.bar(averages['Year'], averages['Time'])
+
+    #plt.show();
+    return
+
+
+    #plt.scatter(male['Time'], male['Age'], c='blue', alpha=0.2, s=120, edgecolors='none', label='Male')
+
+    #plt.scatter(male['Time'], male['Age'], c='blue', alpha=0.2, s=120, edgecolors='none', label='Male')
+    plt.scatter(male2016['Time'], male2016['Age'], c='blue', alpha=0.2, label='2016', s=50)
+    plt.scatter(male2017['Time'], male2017['Age'], c='red', alpha=0.2, label='2017', s=50)
+    plt.scatter(male2018['Time'], male2018['Age'], c='green', alpha=0.2, label='2018', s=50)
+    plt.scatter(male2019['Time'], male2019['Age'], c='purple', alpha=0.2, label='2019', s=50)
+
+    #plt.scatter(female['Time'], female['Age'], c='red', alpha=0.2, s=120, edgecolors='none', label='Female')
     plt.scatter(30.19, 36, s=120, marker='d', label='Schalk', edgecolors='black')
     plt.scatter(31.28, 33, s=120, marker='d', label='Tiaan', edgecolors='black')
     plt.scatter(38.24, 49, s=120, marker='d', label='Neal', edgecolors='black')
     plt.scatter(39.13, 40, s=120, marker='d', label='JP', edgecolors='black')
     plt.scatter(47.16, 42, s=120, marker='d', label='Johan', edgecolors='black')
     plt.ylabel('Age (Years)')
-    plt.xlabel('Time (s)')
+    plt.xlabel('Time (Minutes)')
     plt.legend();
 
     plt.show()
+
+
 
 
 
@@ -52,39 +94,6 @@ def main():
     #print(reverse_bits("00000010100101000001111010011100"))
     clustering()
 
-
-# @param n, an integer
-# @return an integer
-def reverse_bits(n):
-    # TODO
-    return n
-
-
-def reverse(x):
-    """
-    :type x: int
-    :rtype: int
-    """
-
-    negative_number = False
-    if x < 0:
-        x *= -1
-        negative_number = True
-
-    r_string = ""
-    x_string = str(x)
-    for i in x_string:
-        r_string = i + r_string
-
-    x = int(r_string)
-
-    # Catch for return of 32-bit signed integers missing for edge cases...
-    if x < -(2 ** 31) or x > (2 ** 31) - 1:
-        return 0
-
-    if negative_number:
-        return -1*x
-    return x
 
 
 if __name__ == "__main__":
