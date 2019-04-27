@@ -142,6 +142,9 @@ def trend():
     z = np.polyfit(averagesF['Age'], averagesF['Time'], 3)
     p = np.poly1d(z)
     plt.plot(averagesF['Age'], p(averagesF['Age']), "r--", label='Female')
+    plt.xlabel('Age')
+    plt.ylabel('Average Time (minutes)')
+    plt.title('Average Time Trend for Gender&Age')
     plt.legend()
     plt.show()
 
