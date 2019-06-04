@@ -7,6 +7,7 @@ The Ebenezer Mile swim takes place every year in mid-March at the Mountain Yacht
 2.	Male Under 13 and Over 30 1.6km
 3.	Male and Female 13 to 30 1.6km
 4.	Male and Female Open 3000km
+
 With the dam being shallower than previous years the race was a zig-zag between 5 buoys for 2019, where previous years only had a circular 3 buoys route seen in the image below:
 
 ![alt text](https://github.com/rokaN8/ebenezer/blob/master/Photos/Ebenezer_Race.jpeg?raw=true)
