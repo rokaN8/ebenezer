@@ -21,7 +21,7 @@ Data was manually extracted from https://www.timeme.co.za/results/ where only Ge
 ### Count
 Grouped the ages into buckets of 5 years and years and can follow from this that the 13-18 year bracket has the most competitors on average. This is due to a school in the area (Warriors) often competing with the rest of the outside swimmers.
 
-![alt text](https://github.com/rokaN8/ebenezer/blob/master/Results/Count.png?raw=true)
+![alt text](https://raw.githubusercontent.com/rokaN8/ebenezer/master/Results/Count.png)
 
 ### Scatter Plot
 Interesting to plot our group of friends in comparison with the general population.
