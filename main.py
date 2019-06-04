@@ -4,6 +4,7 @@ from matplotlib import style
 import numpy as np
 import scipy.stats as stats
 import math
+import copy
 
 df = pd.read_csv("Ebenezer_Stats2016-2019_full.csv")
 male = df.loc[df['Gender'] == 'M']
@@ -21,53 +22,33 @@ def f(row):
         return 0
     return 1
 
-def clustering():
-    print("Clustering 2")
+def ageaverage():
 
-    #male2016 = male.loc[male['Year'] == '2016']
-    #print(male2016)
-
-
-    #plt.bar(male['Year'], male['Age'])
-    ax = plt.figure()
-
-
+    #ax = plt.figure()
     averages = (df.groupby(['Year', 'Gender']).mean().groupby(['Year', 'Gender'])['Time'].mean())
     df['Age'] = round(df['Age']/5)*5
     total = (df.groupby(['Year', 'Age'])['Gender'].count()).unstack(0).fillna(0)
     speed = (df.groupby(['Year', 'Age'])['Time'].mean()).unstack(0).fillna(0)
-    print(speed)
-    #print(total)
-    plt.xlabel('Count')
-    plt.ylabel('Age Group (5-years)')
-    ax = total.plot.barh()
-    ax.set(xlabel = "Count")
-    ax.set(ylabel="Age (5 Years)")
 
+    #plt.xlabel('Count')
+    #plt.ylabel('Age Group (5-years)')
+    #ax = total.plot.barh()
+    #ax.set(xlabel = "Count")
+    #ax.set(ylabel="Age (5 Years)")
 
-    plt.show()
+    #plt.show()
 
-    return;
-    print(averages.unstack())
+    #return;
+    #print(averages.unstack())
     averages.unstack().plot.barh()
     plt.xlabel('Average Time (minutes)')
     plt.ylabel('Year & Gender')
     plt.show()
-    return
-    print(averages['Year'])
-    #plt.bar(averages['Year'], averages['Time'])
-
-    #plt.show();
-    return
-
-
-
 
 
 
 
 def scatter():
-    print('hello')
 
     plt.scatter(male['Time'], male['Age'], c='blue', alpha=0.2, s=120, edgecolors='none', label='Male')
     plt.scatter(female['Time'], female['Age'], c='red', alpha=0.1, s=120, edgecolors='none', label='Female')
@@ -97,17 +78,13 @@ def minmax():
 
 def count():
     averages = (df.groupby(['Year', 'Gender']).mean().groupby(['Year', 'Gender'])['Time'].mean())
-    print(averages.unstack())
-    df['Age'] = round(df['Age'] / 5) * 5
-    total = (df.groupby(['Year', 'Age'])['Gender'].count()).unstack(0).fillna(0)
-    speed = (df.groupby(['Year', 'Age'])['Time'].mean()).unstack(0).fillna(0)
+    #print(averages.unstack())
+    df2 = copy.deepcopy(df)
+    df2['Age'] = round(df2['Age'] / 5) * 5
+    total = (df2.groupby(['Year', 'Age'])['Gender'].count()).unstack(0).fillna(0)
+    speed = (df2.groupby(['Year', 'Age'])['Time'].mean()).unstack(0).fillna(0)
 
-    #print(speed)
-    print(total)
-    #plt.xlabel('Count')
-    #plt.ylabel('Age Group (5-years)')
-    #plt.plot(total, speed, 'o');
-    plt.legend();
+    #plt.legend();
 
     ax = total.plot.bar()
     ax.set(xlabel="Age (5 Year Buckets)")
@@ -123,7 +100,7 @@ def averages():
 
     plt.xlabel('Year')
     plt.ylabel('Average Time (minutes)')
-    print(np.arange(2016, 2019 + 1, 1.0))
+    #print(np.arange(2016, 2019 + 1, 1.0))
     plt.xticks(np.arange(2016, 2019 + 1, 1.0))
     plt.legend()
 
@@ -149,12 +126,34 @@ def trend():
     plt.show()
 
 def main():
-    print("Hello world")
 
-    #print(reverse(123))
-    #print(reverse_bits("00000010100101000001111010011100"))
-    #scatter()
-    trend()
+    while(True):
+        print("**** EBENEZER SWIM STATS *****\n"
+          "1. Scatter\n"
+              "2. Trend\n"
+              "3. Averages\n"
+              "4. MinMax\n"
+              "5. Count\n"
+              "6. Age Average\n"
+              "q. QUIT\n"
+              "Choice: ")
+        choice = input()
+        if choice == '1':
+            scatter()
+        elif choice == '2':
+            trend()
+        elif choice == '3':
+            averages()
+        elif choice == '4':
+            minmax()
+        elif choice == '5':
+            count()
+        elif choice == '6':
+            ageaverage()
+        elif choice == 'q':
+            break;
+        else:
+            print('Invalid Choice')
 
 
 
