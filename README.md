@@ -21,7 +21,7 @@ Data was manually extracted from https://www.timeme.co.za/results/ where only Ge
 ### Count
 Grouped the ages into buckets of 5 years and years and can follow from this that the 13-18 year bracket has the most competitors on average. This is due to a school in the area (Warriors) often competing with the rest of the outside swimmers.
 
-![alt text](https://github.com/rokaN8/ebenezer/blob/master/Results/AgeAverageCount.png?raw=true)
+![alt text](https://github.com/rokaN8/ebenezer/blob/master/Results/Count.png?raw=true)
 
 ### Scatter Plot
 Interesting to plot our group of friends in comparison with the general population.
@@ -37,3 +37,4 @@ Plot to see that on average male swimmer’s times don’t fall off as quickly a
 One of the group members mentioned that 2018 was a tough year for swimming and they felt that the weather or some external factor affected the race. Given that the races (Event 1 – Female and Event 2 - Male) are swam about an hour from each other it does seem as if weather could have negatively affected the Male race however this is speculative and not confirmed except for the spike seen below.
 
 ![alt text](https://github.com/rokaN8/ebenezer/blob/master/Results/AverageLine.png?raw=true)
+![alt text](https://github.com/rokaN8/ebenezer/blob/master/Results/AgeAverageCount.png?raw=true)
